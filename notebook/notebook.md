@@ -22,7 +22,8 @@ we're tring to do is to decrease the gradient to find a strategy that allow us t
 
 Let's fit a model with an analytical solution to the problem of finding the parameters with the minimum average loss. 
 
-Recall that the average loss is $$  L(w_0, w_1) = \frac{1}{N}\sum_{n=1}^N (t_n - w_0 - w_1x_n)^2 $$
+Recall that the average loss is 
+$$  L(w_0, w_1) = \frac{1}{N}\sum_{n=1}^N (t_n - w_0 - w_1x_n)^2 $$
 $L$ is a function of $w_0$ and $w_1$. All $x_n$ and $t_n$ are given.  
 
 The procedure to find the analytical expression of the optimal parameters is the following:
@@ -168,7 +169,8 @@ point
 
 ### Logistic regression
 We use an activation function to make the classifier more robust to the
-outliers：$$y(x) = \sigma(w_0+w^Tx) ~~~~~~ x\gets[1,x]^T ~~ w\gets[w_0,w]^T$$
+outliers：
+$$y(x) = \sigma(w_0+w^Tx) ~~~~~~ x\gets[1,x]^T ~~ w\gets[w_0,w]^T$$
 $$\sigma(z) = \frac{1}{1+e^{-z}}$$
 $$y(x) = \sigma(w^Tx) = \frac{1}{1+e^{-w^Tx}}$$
 
@@ -184,8 +186,10 @@ $$L(x,w) = \prod{p(t_i=1|x_i,w)p(t_i=0|x_i,w)}$$
 $$L(x,w) = \prod_{i=0}{[\sigma(w^Tx_i)^{t_i}][1-\sigma(w^Tx_i)^{1-t_i}]}$$ 
 **log-likelihood**:
 $$logL(x,w) = t_ilog[\sigma(w^Tx_i)] + (1-t_i)log[1-\sigma(w^Tx_i)]$$
+
 **Cost function**:
-![Alt text](image-8.png)
+<img src="image-8.png" width = 100%>  
+
 #### 多分类问题 Multi-classification problems 
 ovr：把一类作为正例，其他全部作为反例  
 ovr: treat one class as positive examples and all others as negative examples
@@ -235,12 +239,17 @@ The F1 score is proposed mainly because in some cases, focusing only on precisio
 Support Vector Machine (SVM) is a supervised learning model widely used in the field of machine learning and statistical classification. It aims to classify different data points by finding an optimal hyperplane.The core idea of SVM is to create the largest possible edges between categories. The purpose of this hyperplane is to segment the different categories and increase the distance to the nearest data point (i.e., support vector) in each category as much as possible.
 
 #### 定义
-* 训练数据及标签 $(X_1,y_1),(X_2,y_2)...(X_N,X_N) ~~~ X=\begin{bmatrix} x_{11}\\x_{12}\\ \vdots \\x_{1m} \end{bmatrix}$ 
+* 训练数据及标签 
+$$(X_1,y_1),(X_2,y_2)...(X_N,X_N) ~~~ X=\begin{bmatrix} x_{11}\\x_{12}\\ \vdots \\x_{1m} \end{bmatrix}$$ 
 
-* 线性模型 $(w,b) ~~~ W^T+b=0 ~~~~ W=\begin{bmatrix} w_{1}\\w_{2}\\ \vdots \\w_{m} \end{bmatrix}$
+* 线性模型 
+$$(w,b) ~~~ W^T+b=0 ~~~~ W=\begin{bmatrix} w_{1}\\w_{2}\\ \vdots \\w_{m} \end{bmatrix}$$
 * 训练集线性可分 ${(x_i,y_i)}_{i=1\sim N} $
-$$\exist(w,b), 使：任意的i=1\sim N 有 \\ 若y_i=1，则W^TX_i + b \ge 0 \\ 若y_i=-1，则W^TX_i + b < 0$$
-* 若$y_i = [-1,1]$ 则可以写为$y_i[W^TX_i + b] \ge 0$
+$$\exist(w,b), 使：任意的i=1\sim N$$ 
+$$有 若y_i=1，则W^TX_i + b \ge 0 $$
+$$若y_i=-1，则W^TX_i + b < 0$$
+
+* 若 $y_i = [-1,1]$ 则可以写为 $y_i[W^TX_i + b] \ge 0$
 
 #### 两个事实
 ![Alt text](<截屏2023-12-04 09.42.02.png>)
@@ -250,7 +259,9 @@ $$\exist(w,b), 使：任意的i=1\sim N 有 \\ 若y_i=1，则W^TX_i + b \ge 0 \\
 * 限制条件 $y_i[W^TX_i + b] \ge 1 ~~~~ (i=1 \sim N)$
 
 #### SVM处理非线性
-* 最小化(minimize): $ \frac{1}{2} \left \| W \right \| ^ 2 + C \sum_{i=1}^N \xi_i ~~~~~~ $ 其中$ \sum_{i=1}^N \xi_i$ 是正则项(Regulation)  
+* 最小化(minimize): 
+* $$ \frac{1}{2} \left \| W \right \| ^ 2 + C \sum_{i=1}^N \xi_i ~~~~~~ $$ 
+* 其中 $ \sum_{i=1}^N \xi_i$ 是正则项(Regulation)  
  $ \xi_i$ 是松弛变量(Slack Variable) 
 
 * 限制条件 $y_i[W^T\phi(x_i) + b] \ge 1-\xi_i ~~~~ (i=1 \sim N) ~~~ \xi_i \ge 0$
@@ -276,7 +287,8 @@ $$K(x_1,x_2) = \phi(x_1)^T \phi(x_2)$$
 
 * Simplified problem solving: the original SVM optimisation problem is a convex quadratic programming problem, which can be computationally complex to solve directly, especially when the feature dimensions are high. By converting to a dyadic problem, we can transform the original problem into a more tractable form. Dyadic problems typically have fewer variables, especially when dealing with large-scale datasets, and this conversion can significantly reduce the computational cost.
 
-引入kkt条件后整个表达为$\\L(w,b,\alpha) =  \frac{1}{2} \left \| w \right \| ^ 2 + \sum_i^N \alpha_i (1 - y_i(w^Tx_i + b)) \\ \alpha_i>0 \alpha=(\alpha_1 ... \alpha_n)^T ~~~~\\ (1 - y_i(w^Tx_i + b)) \le 0  \\ \alpha_i (1 - y_i(w^Tx_i + b))=0 $  
+引入kkt条件后整个表达为 
+$$\\L(w,b,\alpha) =  \frac{1}{2} \left \| w \right \| ^ 2 + \sum_i^N \alpha_i (1 - y_i(w^Tx_i + b)) \\ \alpha_i>0 \alpha=(\alpha_1 ... \alpha_n)^T ~~~~\\ (1 - y_i(w^Tx_i + b)) \le 0  \\ \alpha_i (1 - y_i(w^Tx_i + b))=0 $$
 
 线性求解：
 ![Alt text](image-10.png)
@@ -305,9 +317,11 @@ K-means是一种广泛使用的聚类算法，其目的是将数据点分组成K
 
 #### Defines
 - Assume that there are K clusters.
-- Each cluster is defined by a position in the input space: $$\mu_k=[\mu_{k1},\mu_{k2}]^T$$
+- Each cluster is defined by a position in the input space: 
+- $$\mu_k=[\mu_{k1},\mu_{k2}]^T$$
 - Each $x_n$ is assigned to its closest cluster
-- Distance is normally Euclidean distance:$$d_{nk} = (x_n - \mu_k)^T(x_n - \mu_k)$$
+- Distance is normally Euclidean distance:
+- $$d_{nk} = (x_n - \mu_k)^T(x_n - \mu_k)$$
 
 #### how do we find $\mu_k$
 - Gusse  $\mu_1,\mu_2,...,\mu_k$
@@ -315,8 +329,8 @@ K-means是一种广泛使用的聚类算法，其目的是将数据点分组成K
 - $Z_{nk}=1 if $x_n$ assigned to $\mu_k$ (0 otherwise)
 $Z_{nk}$是一个指示器变量表示数据点$x_n$是否被分配到特定的簇$k$。如果$x_n$被分配到簇 k，则$Z_{nk}$ ​的值为 1；如果没有被分配到簇 k，则其值为 0。
 - Update $\mu_k$ to average of $x_ns$ assgined to $\mu_k$
-$$\mu_k = \frac{\sum_{n=1}^{N} Z_{nk} x_n}{\sum_{n=1}^{N} Z_{nk}}
-$$
+- $$\mu_k = \frac{\sum_{n=1}^{N} Z_{nk} x_n}{\sum_{n=1}^{N} Z_{nk}}$$
+
 分子$\sum_{n=1}^{N} Z_{nk} x_n$ 这部分计算的是簇k中所有数据点$x_n$的加权和。由于$Z_{nk}$要么是 0 要么是 1，所以只有当$x_n$属于簇k 时，它才会被加入到和中。  
 
 分母$\sum_{n=1}^{N} Z_{nk}$这部分计算的是簇k中数据点的数量。将分子除以分母，我们得到的$\mu_k$​是簇k 中所有点的坐标的平均值，即新的簇中心。这样做是为了将簇中心移动到其所代表的所有点的中心位置，从而在下一次迭代中更好地代表这个簇。
